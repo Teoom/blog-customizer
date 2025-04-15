@@ -15,13 +15,15 @@ type SelectProps = {
 	selected: OptionType | null;
 	options: OptionType[];
 	placeholder?: string;
-	onChange?: (selected: OptionType) => void;
+	onChange?: (selected: OptionType, type: string) => void;
 	onClose?: () => void;
 	title?: string;
+	type: string;
 };
 
 export const Select = (props: SelectProps) => {
-	const { options, placeholder, selected, onChange, onClose, title } = props;
+	const { options, placeholder, selected, onChange, onClose, title, type } =
+		props;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
 	const placeholderRef = useRef<HTMLDivElement>(null);
@@ -39,9 +41,9 @@ export const Select = (props: SelectProps) => {
 		onChange: setIsOpen,
 	});
 
-	const handleOptionClick = (option: OptionType) => {
+	const handleOptionClick = (option: OptionType, type: string) => {
 		setIsOpen(false);
-		onChange?.(option);
+		onChange?.(option, type);
 	};
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
@@ -90,7 +92,7 @@ export const Select = (props: SelectProps) => {
 								<Option
 									key={option.value}
 									option={option}
-									onClick={() => handleOptionClick(option)}
+									onClick={() => handleOptionClick(option, type)}
 								/>
 							))}
 					</ul>
