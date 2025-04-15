@@ -26,6 +26,7 @@ const SelectWithState = () => {
 				onChange={setSelected}
 				options={options}
 				title='Название выпадающего списка'
+				type=''
 			/>
 		</>
 	);
